@@ -1,0 +1,561 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><title>apply for internship
+
+</title><link rel="stylesheet" href="style1.css" type="text/css" /><link rel="stylesheet" href="css/JainendraMenu.css" type="text/css" /><link href="js/mainmenu/sticky.css" rel="stylesheet" />
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="Styles/demo.css" />
+    <link rel="stylesheet" type="text/css" href="Styles/style3.css" />
+    <link rel="stylesheet" type="text/css" href="Styles/animate-custom.css" />
+    <script type="text/javascript">
+        function RefreshCaptcha() {
+            var img = document.getElementById("imgCaptcha");
+            img.src = "CaptchaHandler.ashx?query=" + Math.random();
+        }
+    </script>
+    <script type="text/javascript">
+        function testfunction1(item) {
+            if (item.checked) document.getElementById('MainContainer_chkfemale').checked = false;
+        }
+        function testfunction2(item) {
+            if (item.checked) document.getElementById('MainContainer_chkmale').checked = false;
+        }	
+    </script>
+    <script type="text/javascript">
+        function UserChecker(username) {
+            lbl1 = document.getElementById('MainContainer_lblusername');
+            if (username == '') {
+                lbl1.innerHTML = 'User Name';
+                //                        lbl.style.color = "" ;
+            }
+            else {
+                if (username.length >= 4) {
+                    var patt1 = /\s/g;
+                    var result = username.match(patt1);
+                    if (!username.match(patt1)) {
+                        PageMethods.UserNameChecker(username, OnSucceeded1);
+                    }
+                    else {
+                        lbl1.innerHTML = 'User Name must be minimum 4 characters without any space';
+                        lbl1.style.color = "red";
+                    }
+                }
+                else {
+                    lbl1.innerHTML = 'User Name must be minimum 4 characters.';
+                    lbl1.style.color = "red";
+                }
+            }
+        }
+        function OnSucceeded1(result, userContext, methodName) {
+            lbl1 = document.getElementById('MainContainer_lblusername');
+            if (methodName == "UserNameChecker") {
+                if (result == true) {
+                    lbl1.innerHTML = 'Username Already taken (Not Available)';
+                    lbl1.style.color = "red";
+                }
+                else {
+                    lbl1.innerHTML = 'Username Available';
+                    lbl1.style.color = "green";
+                }
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        function EmailChecker(Email) {
+            lbl = document.getElementById('MainContainer_mesg');
+            var Email1 = document.getElementById('MainContainer_txtuseremailid').value;
+            var emailPat = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
+            var EmailmatchArray = Email1.match(emailPat);
+            if (Email1 == '') {
+                lbl.innerHTML = '';
+            }
+            else {
+                if (EmailmatchArray == null) {
+                    lbl.innerHTML = 'Email Id not valid';
+                    lbl.style.color = 'red';
+                }
+                else {
+                    PageMethods.UserEmailAvailablity(Email, OnSucceeded);
+                }
+            }
+        }
+        function OnSucceeded(result, userContext, methodName) {
+            lbl = document.getElementById('MainContainer_mesg');
+            if (methodName == "UserEmailAvailablity") {
+                if (result == true) {
+                    lbl.innerHTML = 'This emailid is already associated to another account.';
+                    lbl.style.color = "red";
+                }
+                else {
+                    lbl.innerHTML = 'OK';
+                    lbl.style.color = "green";
+                }
+            }
+        }
+    </script>
+    
+    <script type="text/javascript">
+        function Retypeemailcheck(email) {
+            lbl1 = document.getElementById('MainContainer_Span1');
+            if (document.getElementById('MainContainer_txtuseremailid').value != document.getElementById('MainContainer_txtRetypeemail').value) {
+                lbl1.innerHTML = '(Please Retype email correctly)';
+            }
+            else if (document.getElementById('MainContainer_txtuseremailid').value == document.getElementById('MainContainer_txtRetypeemail').value) {
+                lbl1.innerHTML = '';
+            }
+            else if (email = '') {
+                lbl1.innerHTML = '';
+            }
+            
+        }
+                     
+    </script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        function ShowProgress() {
+            setTimeout(function () {
+                var modal = $('<div />');
+                modal.addClass("modal");
+                $('body').append(modal);
+                var loading = $(".loading");
+                loading.show();
+                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                loading.css({ top: top, left: left });
+            }, 200);
+        }
+        $('form').live("submit", function () {
+            ShowProgress();
+        });
+    </script>
+    <style type="text/css">
+        .modal
+        {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: black;
+            z-index: 99;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            -moz-opacity: 0.8;
+            min-height: 100%;
+            width: 100%;
+        }
+        .loading
+        {
+            font-family: Arial;
+            font-size: 10pt;
+            border: 5px solid #67CFF5;
+            width: 200px;
+            height: 100px;
+            display: none;
+            position: fixed;
+            background-color: White;
+            z-index: 999;
+        }
+    </style>
+    <script type="text/javascript">
+        function GetParentIndex(ddl) {
+            var parm = document.getElementById(ddl.id);
+            var strIndexName = parm.options[parm.selectedIndex].text;
+            if (strIndexName == 'Parents') {
+                ShowPopup1("You are setting up a parent account. The name and other details you provide here should be your's and not of your wards.");
+            }
+        }
+        function ShowPopup1(message) {
+            $(function () {
+                $("#dialog").html(message);
+                $("#dialog").dialog({
+                    title: "Alert",
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                        }
+                    },
+                    modal: true
+                });
+            });
+        };
+    </script>
+    <link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    
+    <script type="text/javascript">
+        $(function () {
+            $('#MainContainer_btntermcondition').click(function () {
+                $("#popupdiv").dialog({
+                    title: "Terms & Conditions",
+                    width: 830,
+                    height: 530,
+                    modal: true,
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                        }
+                    }
+                });
+                return false;
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        function ShowPopup(message) {
+            $(function () {
+                $("#dialog").html(message);
+                $("#dialog").dialog({
+                    title: "Alert",
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                        }
+                    },
+                    modal: true
+                });
+            });
+        };
+    </script>
+    <style type="text/css">
+        .ui-dialog > .ui-widget-header
+        {
+            background: #f79646;
+        }
+    </style>
+    
+    <script type="text/javascript">
+        $(function () {
+            var controls = $(".disable");
+            controls.bind("paste", function () {
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+ <div style="width:1000px; margin-left:200px; margin-right:200px">
+  <div id="trueHeader">
+    <div class="wrapper" style="background-color:#ffffff" align="right" >
+  
+          <div class="logo"><a href="#"><img src="vetea-logo-tagline (1).png" alt="logo" /></a></div>
+          <p style="margin-top:70px; color:#f79646 ; font-family:Candara ; font-size:20px ; margin-right:20px ;font-weight:bold"> Online Services Management Portal</p>     
+    </div>
+  </div>
+   <div class="copyright_info two">
+            <div class="container" style="background-color:#ffc000 ;">              
+                <p style="color:#365f91; font-family:Calibri ; font-size:20px; font-weight:bold">
+                    Welcome to EESD PROGRAM Online Services Management Portal </p>               
+            </div>
+        </div>
+    <form method="post" action="./usersignup.aspx?=31" onsubmit="javascript:return WebForm_OnSubmit();" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTgzNjI0MTkzNg9kFgJmD2QWAgIDD2QWAgIBD2QWAgIDDxBkEBUBBVN0YWZmFQECMzEUKwMBZ2RkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYCBRtjdGwwMCRNYWluQ29udGFpbmVyJGNoa21hbGUFHWN0bDAwJE1haW5Db250YWluZXIkY2hrZmVtYWxlllESwtncJQO+xzzLl9B6CN2jhl0OKLmYQSEL9yYtQW4=" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=euEgNgEut4_lz4yBTaUEMSsh32B6cZGA8FT8lf5vbVG3co0QtUIMtGk9X1pMu-kHSCfmcPCrRIxgeJGNx3ZJbl1kad505oXitvXARmKnvmM1&amp;t=636487221871879128" type="text/javascript"></script>
+
+
+
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="/ScriptResource.axd?d=P6H86VK8VDod_Bbr2Teo40a092CjpPr_Lv6qV6A49TZXJywSoKZ40_tTvhGc8Zxq8RMsTZ4odXz6CiWcLzWzyuqSlUVzXKgUypqYhbKm_ZN6J8Yihx8h0tPcOLE1XVLZE6LjjibYCZvu90RYoU1yQg2&amp;t=23c9c237" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+var PageMethods = function() {
+PageMethods.initializeBase(this);
+this._timeout = 0;
+this._userContext = null;
+this._succeeded = null;
+this._failed = null;
+}
+PageMethods.prototype = {
+_get_path:function() {
+ var p = this.get_path();
+ if (p) return p;
+ else return PageMethods._staticInstance.get_path();},
+UserNameChecker:function(UserName,succeededCallback, failedCallback, userContext) {
+return this._invoke(this._get_path(), 'UserNameChecker',false,{UserName:UserName},succeededCallback,failedCallback,userContext); },
+UserEmailAvailablity:function(Email,succeededCallback, failedCallback, userContext) {
+
+return this._invoke(this._get_path(), 'UserEmailAvailablity',false,{Email:Email},succeededCallback,failedCallback,userContext); }}
+PageMethods.registerClass('PageMethods',Sys.Net.WebServiceProxy);
+PageMethods._staticInstance = new PageMethods();
+PageMethods.set_path = function(value) {
+PageMethods._staticInstance.set_path(value); }
+PageMethods.get_path = function() { 
+/// <value type="String" mayBeNull="true">The service url.</value>
+return PageMethods._staticInstance.get_path();}
+PageMethods.set_timeout = function(value) {
+PageMethods._staticInstance.set_timeout(value); }
+PageMethods.get_timeout = function() { 
+/// <value type="Number">The service timeout.</value>
+return PageMethods._staticInstance.get_timeout(); }
+PageMethods.set_defaultUserContext = function(value) { 
+PageMethods._staticInstance.set_defaultUserContext(value); }
+PageMethods.get_defaultUserContext = function() { 
+/// <value mayBeNull="true">The service default user context.</value>
+return PageMethods._staticInstance.get_defaultUserContext(); }
+PageMethods.set_defaultSucceededCallback = function(value) { 
+ PageMethods._staticInstance.set_defaultSucceededCallback(value); }
+PageMethods.get_defaultSucceededCallback = function() { 
+/// <value type="Function" mayBeNull="true">The service default succeeded callback.</value>
+return PageMethods._staticInstance.get_defaultSucceededCallback(); }
+PageMethods.set_defaultFailedCallback = function(value) { 
+PageMethods._staticInstance.set_defaultFailedCallback(value); }
+PageMethods.get_defaultFailedCallback = function() { 
+/// <value type="Function" mayBeNull="true">The service default failed callback.</value>
+return PageMethods._staticInstance.get_defaultFailedCallback(); }
+PageMethods.set_enableJsonp = function(value) { PageMethods._staticInstance.set_enableJsonp(value); }
+PageMethods.get_enableJsonp = function() { 
+/// <value type="Boolean">Specifies whether the service supports JSONP for cross domain calling.</value>
+return PageMethods._staticInstance.get_enableJsonp(); }
+PageMethods.set_jsonpCallbackParameter = function(value) { PageMethods._staticInstance.set_jsonpCallbackParameter(value); }
+PageMethods.get_jsonpCallbackParameter = function() { 
+/// <value type="String">Specifies the parameter name that contains the callback function name for a JSONP request.</value>
+return PageMethods._staticInstance.get_jsonpCallbackParameter(); }
+PageMethods.set_path("usersignup.aspx");
+PageMethods.UserNameChecker= function(UserName,onSuccess,onFailed,userContext) {
+/// <param name="UserName" type="String">System.String</param>
+/// <param name="succeededCallback" type="Function" optional="true" mayBeNull="true"></param>
+/// <param name="failedCallback" type="Function" optional="true" mayBeNull="true"></param>
+/// <param name="userContext" optional="true" mayBeNull="true"></param>
+PageMethods._staticInstance.UserNameChecker(UserName,onSuccess,onFailed,userContext); }
+PageMethods.UserEmailAvailablity= function(Email,onSuccess,onFailed,userContext){
+PageMethods._staticInstance.UserEmailAvailablity(Email,onSuccess,onFailed,userContext); }
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="095AD3EC" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAA5dbmAJ48AHrW6B9OFt91E6AOVfEhFio7YNAdHCJnxL2X3JS80hzAdnXW0ONwF7f8gvfJtvxnqdA6oxnNAMxATZ98AIhRQXeclIy0Nd+yKhlDaiIC7b3VOEZVco7aqjsG8rwg2GxQ2o4wBJvdR5Hi4Y3O4wH9SmqiKW3xxuM/riskm7t4rwOBuLpd+STKx6APV/O/4z33H43ya6R3pJMa7f4PJd95MVRfCtz8QYHen/yQRasRKV13m4plcjhzvkG95hqmr5QEfO4Prb0TX9v0m7gFPqMQUKmtKgODAxQi+vnvEIoAONbwD8CrJBKlQ0f22JlAtc04y2qQUevEKrMbq2" />
+</div>
+    <div style="width:900px;">
+        
+    <div class="container">
+        <section>
+     <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$MainContainer$scmanager', 'form1', [], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+      <div id="container_demo">                    
+                    
+                    <a class="hiddenanchor" id="tologin"></a>
+                    <div id="wrapper" style="width:895px;">
+                    <div id="login" class="animate form">
+                            <form autocomplete="on">                            
+                                <h1> Sign up </h1>
+                                <p>
+                                
+                                <label for="usernamesignup" class="uname">Who are you ?</label>
+                                <select name="ctl00$MainContainer$ddlRole" id="MainContainer_ddlRole" class="uname" required="required" onchange="GetParentIndex(this)" style="height:30px;">
+	<option value="31">intern</option>
+
+</select>
+                                <label id="MainContainer_lblgender" for="usersex" class="Gender">Gender</label>
+                               <input id="MainContainer_chkmale" type="checkbox" name="ctl00$MainContainer$chkmale" onclick="testfunction1(this);" /><label for="MainContainer_chkmale">Male</label>
+                               <input id="MainContainer_chkfemale" type="checkbox" name="ctl00$MainContainer$chkfemale" onclick="testfunction2(this);" /><label for="MainContainer_chkfemale">Female</label>
+                                </p>
+                                <table>                               
+                                <tr>
+                                <td style="width:355px;padding:0 25px 0 0">
+                                <p>                                
+                                <label for="usernamesignup" class="uname" data-icon="f">First Name</label>                                    
+                                    <input name="ctl00$MainContainer$txtfirstname" id="txtfirstname" name="usernamesignup" required="required" type="text" placeholder="Your first name" />
+                                </p>
+                                <p>
+                                 <span id="MainContainer_RegularExpressionValidator7" style="color:#FF3300;visibility:hidden;"> * Characters only </span>
+                                                              </p>
+                                </td>
+                                                        
+                                <td style="width:355px;padding:0 0 0 25px">
+                                 <p>                                
+                                <label for="usernamesignup" class="uname" data-icon="l">Last Name</label>                                    
+                                    <input name="ctl00$MainContainer$txtlastname" id="txtlastname" name="usernamesignup" type="text" placeholder="Your last name" />
+                                </p>
+                               <p> </p>
+                                </td> 
+                                </tr>
+                                </table>
+                        
+                                <p> 
+                                    <label id="MainContainer_lblusername" for="usernamesignup" class="uname" data-icon="u">Your username</label>  
+                                                                     
+                                    <input name="ctl00$MainContainer$textuserid" id="MainContainer_textuserid" name="usernamesignup" required="required" type="text" placeholder="Create unique username" onkeyup="UserChecker(this.value)" />                                                                                                                             
+                                </p>
+                                <p> 
+                                    <label for="emailsignup" class="youmail" data-icon="e" > Your email</label> <span id="MainContainer_mesg"></span>                                    
+                                    <input name="ctl00$MainContainer$txtuseremailid" id="MainContainer_txtuseremailid" name="emailsignup" required="required" type="email" placeholder="Enter your emailid" onkeyup="EmailChecker(this.value)" />
+                                </p>
+                                <p>
+                                 <label for="Remailsignup" class="youmail" data-icon="Re" >Retype Your email</label> <span id="MainContainer_Span1" style="color:Red"></span>                                    
+                                    <input name="ctl00$MainContainer$txtRetypeemail" id="MainContainer_txtRetypeemail" class="disable" name="Retypeemailsignup" required="required" type="email" placeholder="Retype your emailid" onfocusout="Retypeemailcheck(this.value)" />
+                                </p>                     
+                                <p> 
+                                    <label for="emailsignup" class="youmail" data-icon="m" > Your Mobile number</label>                                   
+                                    <input name="ctl00$MainContainer$txtmobileno" id="txtmobileno" name="mobilesignup" type="tel" required="required" pattern="[0-9]{10,10}" placeholder="Enter Your 10 digit mobile number" />
+                                </p>
+                                <p> 
+                                   
+                                    <label id="MainContainer_lblpassword" for="passwordsignup" class="youpasswd" data-icon="p">Password </label>&nbsp;&nbsp;<span id="MainContainer_Regex3" style="color:Red;visibility:hidden;">Minimum 6 characters atleast 1 UpperCase Alphabet, 1 LowerCase Alphabet and 1 Number(No special character)</span>      
+                                                                                                  
+                                   <input name="ctl00$MainContainer$txtpassword" id="MainContainer_txtpassword" type="password" title="Password must contain at least 6 characters, Uppercase, Lowercase and Number(No special character)" placeholder="Minimum 6 characters atleast 1 UpperCase Alphabet, 1 LowerCase Alphabet and 1 Number(No special character)" />
+                                </p>
+                                <p> 
+                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="rp">Confirm password </label>&nbsp;&nbsp; <span id="MainContainer_comparePasswords" style="color:Red;display:none;">Your passwords do not match up!</span>       
+                                   <input name="ctl00$MainContainer$txtconfirmpass" id="MainContainer_txtconfirmpass" name="passwordsignup_confirm" required="required" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" onchange=" this.setCustomValidity(this.validity.patternMismatch ? &#39;Please enter the same Password as above&#39; : &#39;&#39;);" placeholder="Re-type password" />
+                                </p>
+                               
+                                <p><input id="field_terms" type="checkbox" required name="terms">                                
+                                <label for="field_terms">I accept the <u><a href="TermandCondition.aspx" id="MainContainer_btntermcondition" target="_blank">Terms and Conditions</a></u></label></p>                                                            
+                                <p class="signin button"> 
+									
+                                    
+                                    <input type="submit" name="ctl00$MainContainer$btnsignup" value="Sign up" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$MainContainer$btnsignup&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="MainContainer_btnsignup" value="Sign up" />                                                                                                              
+								</p> 
+                                <div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='Images/Loader.png' width="64" height="64" /><br>Loading..</div>                               
+                                <p class="change_link" id="gotologin">  
+									Already a member ?
+									<a href="ESD main web.html" class="to_register"> Go and log in </a>                                   
+								</p>       
+                                                      
+                            </form>
+
+                        </div>
+                        </div>
+                        </div>
+                        </section>
+    </div>
+    <div class="loading" align="center">
+        Please wait.<br />
+        <br />
+        <img src="Images/Loader.png" alt="" />
+    </div>
+    <div id="popupdiv" class="dialog-title" title="Basic modal dialog" style="display: none">
+        <p align="center">
+            <b>Welcome TO EESD </b>
+        </p>
+        <p>
+            <b>1. Service Description </b></br> &nbsp;&nbsp;&nbsp;&nbsp;1.1. The description
+            of the service is dependent on the specific product or service you have applied
+            for, and may be dependent on a particular quotation or offer. </br> &nbsp;&nbsp;&nbsp;&nbsp;1.2.
+            Due to continued development, the scope of services supplied is subject to change
+            without notice. </br> <b>2. Confidentiality </b></br> &nbsp;&nbsp;&nbsp;&nbsp;2.1.
+            Snapsite agrees to treat as confidential your business information, strategies,
+            details of inventions, marketing ideas and the like that you may have disclosed
+            to us. </br> &nbsp;&nbsp;&nbsp;&nbsp;2.2. Your confidential information will not
+            be disclosed to any other parties unless: </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.1.
+            with your express permission, </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.2.
+            you instruct us to include such information on your website, </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.3.
+            such information enters the public domain and is no longer confidential, </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.4.
+            it is necessary to do so in order for us to provide the service you have engaged
+            us to provide. In this case, any such third party will also be bound by the same
+            agreement to confidentiality. </br> <b>3. Quotations </b></br> &nbsp;&nbsp;&nbsp;&nbsp;3.1.
+            Quotations are valid for acceptance for a period of 30 days, and thereafter are
+            subject to confirmation. </br> &nbsp;&nbsp;&nbsp;&nbsp;3.2. Quotations for website
+            construction include basic processing of images such as re-sizing and cropping.
+            Significant processing, such as perspective correction, background removal, adding
+            / removing content) may be subject to additional charges at our ruling rate. </br>
+            &nbsp;&nbsp;&nbsp;&nbsp;3.3. Where there are conflicts between our quotation and
+            these Standard Terms and Conditions, the former will take precedence</p>
+    </div>
+    <div id="dialog" style="display: none">
+    </div>
+
+    </div>
+    
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("MainContainer_RegularExpressionValidator7"), document.getElementById("MainContainer_Regex3"), document.getElementById("MainContainer_comparePasswords"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var MainContainer_RegularExpressionValidator7 = document.all ? document.all["MainContainer_RegularExpressionValidator7"] : document.getElementById("MainContainer_RegularExpressionValidator7");
+MainContainer_RegularExpressionValidator7.controltovalidate = "txtfirstname";
+MainContainer_RegularExpressionValidator7.errormessage = " * Characters only ";
+MainContainer_RegularExpressionValidator7.validationGroup = "Personal";
+MainContainer_RegularExpressionValidator7.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+MainContainer_RegularExpressionValidator7.validationexpression = "[a-zA-Z ]*$";
+var MainContainer_Regex3 = document.all ? document.all["MainContainer_Regex3"] : document.getElementById("MainContainer_Regex3");
+MainContainer_Regex3.controltovalidate = "MainContainer_txtpassword";
+MainContainer_Regex3.errormessage = "Minimum 6 characters atleast 1 UpperCase Alphabet, 1 LowerCase Alphabet and 1 Number(No special character)";
+MainContainer_Regex3.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+MainContainer_Regex3.validationexpression = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$";
+var MainContainer_comparePasswords = document.all ? document.all["MainContainer_comparePasswords"] : document.getElementById("MainContainer_comparePasswords");
+MainContainer_comparePasswords.controltovalidate = "MainContainer_txtconfirmpass";
+MainContainer_comparePasswords.errormessage = "Your passwords do not match up!";
+MainContainer_comparePasswords.display = "Dynamic";
+MainContainer_comparePasswords.evaluationfunction = "CompareValidatorEvaluateIsValid";
+MainContainer_comparePasswords.controltocompare = "MainContainer_txtpassword";
+MainContainer_comparePasswords.controlhookup = "MainContainer_txtpassword";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function () { $('[id*=btnsignup]').click(); });
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        
+document.getElementById('MainContainer_RegularExpressionValidator7').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('MainContainer_RegularExpressionValidator7'));
+}
+
+document.getElementById('MainContainer_Regex3').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('MainContainer_Regex3'));
+}
+
+document.getElementById('MainContainer_comparePasswords').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('MainContainer_comparePasswords'));
+}
+//]]>
+</script>
+</form>
+    </div>
+</body>
+</html>

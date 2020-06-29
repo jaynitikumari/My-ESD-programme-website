@@ -1,0 +1,26 @@
+.brown-circle
+{
+    display: block;
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    -moz-border-radius: 75px;
+    -webkit-border-radius: 75px;
+    -khtml-border-radius: 75px;
+    border-radius: 75px;
+    border-color: Black;
+    border-width: 2px;
+    position: relative;
+    float: left;
+    margin: 0 0px 0px 0;
+}
+
+.logo
+{
+    float: none !important;
+    width: 188px;
+    height: auto !important;
+    background-color: white;
+    margin-top: 10px;
+    text-align: center;
+}
